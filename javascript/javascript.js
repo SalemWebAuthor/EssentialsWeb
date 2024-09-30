@@ -21,9 +21,6 @@ function showNextSlide() {
     setTimeout(showNextSlide, slideDuration);
 }
 
-// Start the slider
-window.onload = showNextSlide;
-
 // <----- HERO SECTION - END ----->
 
 
@@ -60,6 +57,30 @@ setInterval(() => {
 
 // <----- THIRD PAGE - START ----->
 
+function initCarouselScroll() {
+    const carousel = document.querySelector('#thirdpage .carousel');
+    const scrollAmount = 400; // Adjust this value for desired scroll step
+
+    // Ensure only the carousel is scrollable with the keyboard
+    window.addEventListener('keydown', function (event) {
+        if (event.key === 'ArrowRight') {
+            // Scroll right when the right arrow key is pressed
+            carousel.scrollBy({
+                left: scrollAmount,
+                behavior: 'smooth' // Enables smooth scrolling
+            });
+        } else if (event.key === 'ArrowLeft') {
+            // Scroll left when the left arrow key is pressed
+            carousel.scrollBy({
+                left: -scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+    });
+
+    // Ensure the carousel is focusable
+    carousel.setAttribute('tabindex', '0');
+}
 
 // <----- THIRD PAGE - END ----->
 
@@ -72,3 +93,47 @@ setInterval(() => {
 
 
 // <----- FOURTH PAGE - END ----->
+
+// <----- Contact Page - START ----->
+function showContactInfo() {
+    const contactDetails = {
+        us: {
+            phone: "+1 (800) 123-4567",
+            email: "FOGsupport.US@gmail.com"
+        },
+        za: {
+            phone: "+27 (800) 987-6543",
+            email: "FOGsupport.SA@gmail.com"
+        },
+        ph: {
+            phone: "+63 (800) 456-7890",
+            email: "FOGsupport.PH@gmail.com"
+        }
+    };
+
+    const country = document.getElementById('country').value;
+    const contactDetailsElement = document.getElementById('contact-details');
+
+    if (country && contactDetails[country]) {
+        const { phone, email } = contactDetails[country];
+        contactDetailsElement.innerHTML = `Phone: ${phone} <br> Email: ${email}`;
+        contactDetailsElement.classList.remove('hidden');
+        contactDetailsElement.classList.add('visible');
+    } else {
+        contactDetailsElement.innerHTML = "Please select a country/region to have contact details shown.";
+        contactDetailsElement.classList.remove('visible');
+        contactDetailsElement.classList.add('hidden');
+    }
+}
+
+// <----- Contact Page - END ----->
+
+// <----- Global Window Load Initialization ----->
+
+// Call the function on window load
+window.onload = function() {
+    showNextSlide(); // Start the slide show
+    initCarouselScroll(); // Initialize carousel scroll only
+}; 
+
+

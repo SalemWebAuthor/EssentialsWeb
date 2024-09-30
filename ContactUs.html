@@ -24,16 +24,17 @@
             </div>
             <div class="contact-info">
                 <label for="country">View contact information for:</label>
-                <select id="country">
+                <select id="country" onchange="showContactInfo()">
                     <option value="">Select Country/Region</option>
                     <option value="us">United States</option>
-                    <option value="uk"> South Africa </option>
-                    <option value="ca"> Philippines </option>
+                    <option value="za">South Africa</option>
+                    <option value="ph">Philippines</option>
                 </select>
-                <p>Please select a country/region to have contact details shown.</p>
+                <p id="contact-details" class="hidden">Please select a country/region to have contact details shown.</p>
             </div>
         </div>
     </section>
 
+    <script src="javascript/javascript.js"></script>
 </body>
 </html>
